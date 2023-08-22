@@ -10,11 +10,14 @@
 
 unsigned long long base_start = 1000000000000000;
 
-void resumer(){
+void resumer(int r){
     printf("\n\nLast used code was: %lld", base_start);
 	FILE * fp = fopen("lastcode","w");
 	fprintf(fp,"%llu",base_start);
 	fclose(fp);
+  if (r) {
+    return;
+  }
     exit(1);
 }
 
@@ -24,7 +27,7 @@ long long numr(long long x) {
     return x;
   }
   printf(" ### ### COUNTING NOW: %llu\n", x);
-  resumer();
+  resumer(1);
   return x;
 }
 
