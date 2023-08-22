@@ -18,6 +18,15 @@ void resumer(){
     exit(1);
 }
 
+long long numr(long long x) {
+  // printf("%llu\n",x);
+  if (x%5000) {
+    return x;
+  }
+  printf(" ### ### COUNTING NOW: %llu\n", x);
+  return x;
+}
+
 int main( int argc, char **argv) {
 	if ( argc > 1 ) {
 	        char *base = argv[1];
@@ -34,7 +43,7 @@ int main( int argc, char **argv) {
     char fou[LEN] = "fastboot oem unlock ";
     char TOTAL[LEN];
 
-    while (sprintf( TOTAL, "%s%llu", fou, base_start++) && system( TOTAL ));
+    while (sprintf( TOTAL, "%s%llu", fou, numr(base_start++)) && system( TOTAL ));
 
     printf("Your unlock code is: %llu", base_start);
 
