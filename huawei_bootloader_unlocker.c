@@ -24,6 +24,7 @@ long long numr(long long x) {
     return x;
   }
   printf(" ### ### COUNTING NOW: %llu\n", x);
+  resumer();
   return x;
 }
 
