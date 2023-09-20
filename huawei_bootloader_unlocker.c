@@ -11,6 +11,7 @@
 
 unsigned long long base_start = 1000000000000000;
 
+unsigned long long start_base;
 time_t start_time;
 
 void resumer(int r){
@@ -20,6 +21,11 @@ void resumer(int r){
 	fclose(fp);
   FILE * fr = fopen("record","a");
   fprintf(fr,"END %llu %ld BLAH\n", base_start, time(NULL));
+  long tdiff = time(NULL)-start_time;
+  long cdiff = difftime(base_start, start_base);
+  float ratio = cdiff/tdiff;
+  fprintf(fr,"STATS did %lu tries in %lu seconds.\n", cdiff, tdiff);
+  fprintf(fr,"STATS    for an avg %f tries/sec\n",ratio);
   fclose(fr);
   if (r) {
     return;
@@ -48,6 +54,7 @@ int main( int argc, char **argv) {
 		fclose(fp);
 		}
 	}
+  start_base = base_start;
   start_time = time(NULL);
   FILE * fr = fopen("record","a");
   fprintf(fr,"START %llu %ld BLOOP\n", base_start, start_time);
