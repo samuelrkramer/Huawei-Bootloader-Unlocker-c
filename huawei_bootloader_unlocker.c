@@ -5,16 +5,22 @@
 #include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #define LEN 37
 
 unsigned long long base_start = 1000000000000000;
+
+time_t start_time;
 
 void resumer(int r){
     printf("\n\nLast used code was: %lld", base_start);
 	FILE * fp = fopen("lastcode","w");
 	fprintf(fp,"%llu",base_start);
 	fclose(fp);
+  FILE * fr = fopen("record","w");
+  fprintf(fr,"END %llu %ld BLAH\n", base_start, time(NULL));
+  fclose(fr);
   if (r) {
     return;
   }
@@ -42,6 +48,9 @@ int main( int argc, char **argv) {
 		fclose(fp);
 		}
 	}
+  start_time = time(NULL);
+  FILE * fr = fopen("record","w");
+  fprintf(fr,"START %llu %ld BLOOP\n", base_start, start_time);
     signal(SIGINT, resumer);
 	signal(SIGTERM, resumer);
     char fou[LEN] = "fastboot oem unlock ";
