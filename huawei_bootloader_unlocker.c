@@ -18,7 +18,7 @@ void resumer(int r){
 	FILE * fp = fopen("lastcode","w");
 	fprintf(fp,"%llu",base_start);
 	fclose(fp);
-  FILE * fr = fopen("record","w");
+  FILE * fr = fopen("record","a");
   fprintf(fr,"END %llu %ld BLAH\n", base_start, time(NULL));
   fclose(fr);
   if (r) {
@@ -49,7 +49,7 @@ int main( int argc, char **argv) {
 		}
 	}
   start_time = time(NULL);
-  FILE * fr = fopen("record","w");
+  FILE * fr = fopen("record","a");
   fprintf(fr,"START %llu %ld BLOOP\n", base_start, start_time);
     signal(SIGINT, resumer);
 	signal(SIGTERM, resumer);
