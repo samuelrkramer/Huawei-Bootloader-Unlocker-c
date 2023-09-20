@@ -51,6 +51,7 @@ int main( int argc, char **argv) {
   start_time = time(NULL);
   FILE * fr = fopen("record","a");
   fprintf(fr,"START %llu %ld BLOOP\n", base_start, start_time);
+  fclose(fr);
     signal(SIGINT, resumer);
 	signal(SIGTERM, resumer);
     char fou[LEN] = "fastboot oem unlock ";
